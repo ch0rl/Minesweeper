@@ -3,7 +3,7 @@ A simple minesweeper app.
 
 ## Features
 - [x] Basic minesweeper functionality
-- [ ] Chording
+- [x] Chording
 - [ ] Cheats 
 ## Running
 1. `pip install -r requirements.txt` Install requirements
