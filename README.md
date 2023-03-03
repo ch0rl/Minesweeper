@@ -2,9 +2,9 @@
 A simple minesweeper app.
 
 ## Features
-[x] Basic minesweeper functionality
-[ ] Chording
-[ ] Cheats 
+- [x] Basic minesweeper functionality
+- [ ] Chording
+- [ ] Cheats 
 ## Running
 1. `pip install -r requirements.txt` Install requirements
 2. `python minesweeper.py` Run the program
