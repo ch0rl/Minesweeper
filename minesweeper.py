@@ -44,6 +44,10 @@ def expand_0s(init_box: Box, seen: List | None = None):
                 seen.append(point)
                 
                 expand_0s(box, seen)
+                
+
+def get_boxes(boxes: List[List[Box]], points: List[Point]) -> List[Box]:
+    return [boxes[i.x][i.y] for i in points]
 
 
 # ~~~ Setup
@@ -111,10 +115,21 @@ while RUNNING:
                             RUNNING = False
                         
                         if not box.is_flag:
-                            box.revealed = True
-                            
-                            if box.num == 0:
-                                expand_0s(box)
+                            if box.revealed:
+                                # Chording
+                                neighbours = get_boxes(BOXES, box.get_neighbours(NUM_BOXES))
+                                if sum(map(lambda x: x.is_flag, neighbours)) == box.num:
+                                    for _box in neighbours:
+                                        if not _box.is_flag:
+                                            _box.revealed = True
+                                            
+                                        if _box.num == 0:
+                                            expand_0s(_box)
+                            else:
+                                box.revealed = True
+                                
+                                if box.num == 0:
+                                    expand_0s(box)
 
     # Set background
     screen.fill(GREY)
@@ -130,6 +145,9 @@ while RUNNING:
                 colour = GREEN
             elif box.revealed:
                 colour = DARK_GREY
+                
+                if box.num == 0:
+                    colour = GREY
             else:
                 colour = BLUE
 
